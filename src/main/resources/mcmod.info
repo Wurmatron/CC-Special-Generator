@@ -1,0 +1,16 @@
+[
+{
+  "modid": "ccspecial",
+  "name": "CubicChunks Special Generator",
+  "description": "Allows for special World types, such as skygrid, stars",
+  "version": "@VERSION@",
+  "mcversion": "1.12.2",
+  "url": "https://github.com/Wurmatron/CC-Special-Generator",
+  "updateUrl": "",
+  "authorList": ["Wurmatron"],
+  "credits": "Special thanks to the CubicChunks dev team for such a amazing mod",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
