@@ -1,6 +1,6 @@
 package io.wurmatron.ccspecial;
 
-import net.minecraft.init.Blocks;
+import io.wurmatron.ccspecial.common.skygrid.SkyGridWorldType;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -18,6 +18,7 @@ public class CCSpecial {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
+        new SkyGridWorldType("Skygrid");
     }
 
     @EventHandler
