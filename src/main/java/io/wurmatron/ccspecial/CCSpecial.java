@@ -1,6 +1,7 @@
 package io.wurmatron.ccspecial;
 
 import io.wurmatron.ccspecial.common.skygrid.SkyGridWorldType;
+import io.wurmatron.ccspecial.common.stars.PlanetsWorldType;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -19,6 +20,7 @@ public class CCSpecial {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         new SkyGridWorldType("Skygrid");
+        new PlanetsWorldType("Planets");
     }
 
     @EventHandler
