@@ -28,7 +28,7 @@ public class CCSpecial {
         logger = e.getModLog();
         new SkyGridWorldType("Skygrid");
         new PlanetsWorldType("Planets");
-        configDir = e.getModConfigurationDirectory();
+        configDir = new File(e.getModConfigurationDirectory() + File.separator + "CC-Special");
     }
 
     @EventHandler
