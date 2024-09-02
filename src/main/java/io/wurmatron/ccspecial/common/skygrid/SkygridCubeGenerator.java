@@ -9,6 +9,7 @@ import io.github.opencubicchunks.cubicchunks.api.worldgen.CubePrimer;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.ICubeGenerator;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.populator.CubePopulatorEvent;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.populator.event.PopulateCubeEvent;
+import io.wurmatron.ccspecial.common.utils.BlockLoader;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -30,7 +31,7 @@ public class SkygridCubeGenerator implements ICubeGenerator {
 
     public SkygridCubeGenerator(World world) {
         this.world = world;
-        world.setSpawnPoint(new BlockPos(0,0,0));
+        world.setSpawnPoint(new BlockPos(0, 0, 0));
     }
 
     @Override
@@ -41,90 +42,79 @@ public class SkygridCubeGenerator implements ICubeGenerator {
     @Override
     public CubePrimer generateCube(int cubeX, int cubeY, int cubeZ, CubePrimer primer) {
         // Y = 0;
-        primer.setBlockState(0, 0, 0,getRandomBlock());
-        primer.setBlockState(0, 0, 4,getRandomBlock());
-        primer.setBlockState(0, 0, 8,getRandomBlock());
-        primer.setBlockState(0, 0, 12,getRandomBlock());
-        primer.setBlockState(4, 0, 0,getRandomBlock());
-        primer.setBlockState(4, 0, 4,getRandomBlock());
-        primer.setBlockState(4, 0, 8,getRandomBlock());
-        primer.setBlockState(4, 0, 12,getRandomBlock());
-        primer.setBlockState(8, 0, 0,getRandomBlock());
-        primer.setBlockState(8, 0, 4,getRandomBlock());
-        primer.setBlockState(8, 0, 8,getRandomBlock());
-        primer.setBlockState(8, 0, 12,getRandomBlock());
-        primer.setBlockState(12, 0, 0,getRandomBlock());
-        primer.setBlockState(12, 0, 4,getRandomBlock());
-        primer.setBlockState(12, 0, 8,getRandomBlock());
-        primer.setBlockState(12, 0, 12,getRandomBlock());
+        primer.setBlockState(0, 0, 0, getRandomBlock());
+        primer.setBlockState(0, 0, 4, getRandomBlock());
+        primer.setBlockState(0, 0, 8, getRandomBlock());
+        primer.setBlockState(0, 0, 12, getRandomBlock());
+        primer.setBlockState(4, 0, 0, getRandomBlock());
+        primer.setBlockState(4, 0, 4, getRandomBlock());
+        primer.setBlockState(4, 0, 8, getRandomBlock());
+        primer.setBlockState(4, 0, 12, getRandomBlock());
+        primer.setBlockState(8, 0, 0, getRandomBlock());
+        primer.setBlockState(8, 0, 4, getRandomBlock());
+        primer.setBlockState(8, 0, 8, getRandomBlock());
+        primer.setBlockState(8, 0, 12, getRandomBlock());
+        primer.setBlockState(12, 0, 0, getRandomBlock());
+        primer.setBlockState(12, 0, 4, getRandomBlock());
+        primer.setBlockState(12, 0, 8, getRandomBlock());
+        primer.setBlockState(12, 0, 12, getRandomBlock());
         // Y = 4
-        primer.setBlockState(0, 4, 0,getRandomBlock());
-        primer.setBlockState(0, 4, 4,getRandomBlock());
-        primer.setBlockState(0, 4, 8,getRandomBlock());
-        primer.setBlockState(0, 4, 12,getRandomBlock());
-        primer.setBlockState(4, 4, 0,getRandomBlock());
-        primer.setBlockState(4, 4, 4,getRandomBlock());
-        primer.setBlockState(4, 4, 8,getRandomBlock());
-        primer.setBlockState(4, 4, 12,getRandomBlock());
-        primer.setBlockState(8, 4, 0,getRandomBlock());
-        primer.setBlockState(8, 4, 4,getRandomBlock());
-        primer.setBlockState(8, 4, 8,getRandomBlock());
-        primer.setBlockState(8, 4, 12,getRandomBlock());
-        primer.setBlockState(12, 4, 0,getRandomBlock());
-        primer.setBlockState(12, 4, 4,getRandomBlock());
-        primer.setBlockState(12, 4, 8,getRandomBlock());
-        primer.setBlockState(12, 4, 12,getRandomBlock());
+        primer.setBlockState(0, 4, 0, getRandomBlock());
+        primer.setBlockState(0, 4, 4, getRandomBlock());
+        primer.setBlockState(0, 4, 8, getRandomBlock());
+        primer.setBlockState(0, 4, 12, getRandomBlock());
+        primer.setBlockState(4, 4, 0, getRandomBlock());
+        primer.setBlockState(4, 4, 4, getRandomBlock());
+        primer.setBlockState(4, 4, 8, getRandomBlock());
+        primer.setBlockState(4, 4, 12, getRandomBlock());
+        primer.setBlockState(8, 4, 0, getRandomBlock());
+        primer.setBlockState(8, 4, 4, getRandomBlock());
+        primer.setBlockState(8, 4, 8, getRandomBlock());
+        primer.setBlockState(8, 4, 12, getRandomBlock());
+        primer.setBlockState(12, 4, 0, getRandomBlock());
+        primer.setBlockState(12, 4, 4, getRandomBlock());
+        primer.setBlockState(12, 4, 8, getRandomBlock());
+        primer.setBlockState(12, 4, 12, getRandomBlock());
         // Y = 8
-        primer.setBlockState(0, 8, 0,getRandomBlock());
-        primer.setBlockState(0, 8, 4,getRandomBlock());
-        primer.setBlockState(0, 8, 8,getRandomBlock());
-        primer.setBlockState(0, 8, 12,getRandomBlock());
-        primer.setBlockState(4, 8, 0,getRandomBlock());
-        primer.setBlockState(4, 8, 4,getRandomBlock());
-        primer.setBlockState(4, 8, 8,getRandomBlock());
-        primer.setBlockState(4, 8, 12,getRandomBlock());
-        primer.setBlockState(8, 8, 0,getRandomBlock());
-        primer.setBlockState(8, 8, 4,getRandomBlock());
-        primer.setBlockState(8, 8, 8,getRandomBlock());
-        primer.setBlockState(8, 8, 12,getRandomBlock());
-        primer.setBlockState(12, 8, 0,getRandomBlock());
-        primer.setBlockState(12, 8, 4,getRandomBlock());
-        primer.setBlockState(12, 8, 8,getRandomBlock());
-        primer.setBlockState(12, 8, 12,getRandomBlock());
+        primer.setBlockState(0, 8, 0, getRandomBlock());
+        primer.setBlockState(0, 8, 4, getRandomBlock());
+        primer.setBlockState(0, 8, 8, getRandomBlock());
+        primer.setBlockState(0, 8, 12, getRandomBlock());
+        primer.setBlockState(4, 8, 0, getRandomBlock());
+        primer.setBlockState(4, 8, 4, getRandomBlock());
+        primer.setBlockState(4, 8, 8, getRandomBlock());
+        primer.setBlockState(4, 8, 12, getRandomBlock());
+        primer.setBlockState(8, 8, 0, getRandomBlock());
+        primer.setBlockState(8, 8, 4, getRandomBlock());
+        primer.setBlockState(8, 8, 8, getRandomBlock());
+        primer.setBlockState(8, 8, 12, getRandomBlock());
+        primer.setBlockState(12, 8, 0, getRandomBlock());
+        primer.setBlockState(12, 8, 4, getRandomBlock());
+        primer.setBlockState(12, 8, 8, getRandomBlock());
+        primer.setBlockState(12, 8, 12, getRandomBlock());
         // Y = 12
-        primer.setBlockState(0, 12, 0,getRandomBlock());
-        primer.setBlockState(0, 12, 4,getRandomBlock());
-        primer.setBlockState(0, 12, 8,getRandomBlock());
-        primer.setBlockState(0, 12, 12,getRandomBlock());
-        primer.setBlockState(4, 12, 0,getRandomBlock());
-        primer.setBlockState(4, 12, 4,getRandomBlock());
-        primer.setBlockState(4, 12, 8,getRandomBlock());
-        primer.setBlockState(4, 12, 12,getRandomBlock());
-        primer.setBlockState(8, 12, 0,getRandomBlock());
-        primer.setBlockState(8, 12, 4,getRandomBlock());
-        primer.setBlockState(8, 12, 8,getRandomBlock());
-        primer.setBlockState(8, 12, 12,getRandomBlock());
-        primer.setBlockState(12, 12, 0,getRandomBlock());
-        primer.setBlockState(12, 12, 4,getRandomBlock());
-        primer.setBlockState(12, 12, 8,getRandomBlock());
-        primer.setBlockState(12, 12, 12,getRandomBlock());
+        primer.setBlockState(0, 12, 0, getRandomBlock());
+        primer.setBlockState(0, 12, 4, getRandomBlock());
+        primer.setBlockState(0, 12, 8, getRandomBlock());
+        primer.setBlockState(0, 12, 12, getRandomBlock());
+        primer.setBlockState(4, 12, 0, getRandomBlock());
+        primer.setBlockState(4, 12, 4, getRandomBlock());
+        primer.setBlockState(4, 12, 8, getRandomBlock());
+        primer.setBlockState(4, 12, 12, getRandomBlock());
+        primer.setBlockState(8, 12, 0, getRandomBlock());
+        primer.setBlockState(8, 12, 4, getRandomBlock());
+        primer.setBlockState(8, 12, 8, getRandomBlock());
+        primer.setBlockState(8, 12, 12, getRandomBlock());
+        primer.setBlockState(12, 12, 0, getRandomBlock());
+        primer.setBlockState(12, 12, 4, getRandomBlock());
+        primer.setBlockState(12, 12, 8, getRandomBlock());
+        primer.setBlockState(12, 12, 12, getRandomBlock());
         return primer;
     }
 
-    // TODO Replace with Config
+
     private IBlockState getRandomBlock() {
-        int r = world.rand.nextInt(5);
-        if(r == 0) {
-            return Blocks.STONE.getDefaultState();
-        } else if(r == 1) {
-            return Blocks.BOOKSHELF.getDefaultState();
-        } else if(r == 2) {
-            return Blocks.HAY_BLOCK.getDefaultState();
-        } else if(r == 3) {
-            return Blocks.DIRT.getDefaultState();
-        } else {
-            return Blocks.BONE_BLOCK.getDefaultState();
-        }
+        return BlockLoader.skyblock.get(world.rand.nextInt(BlockLoader.skyblock.size()));
     }
 
     public void generateColumn(Chunk column) {
@@ -133,7 +123,6 @@ public class SkygridCubeGenerator implements ICubeGenerator {
         for (int i = 0; i < columnBiomeArray.length; ++i) {
             columnBiomeArray[i] = (byte) Biome.getIdForBiome(this.columnBiomes[i]);
         }
-
     }
 
     @Override
