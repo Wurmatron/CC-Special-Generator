@@ -149,7 +149,7 @@ public class BlockLoader {
         PlanetEntry emerald = new PlanetEntry("emerald_ore",0,"stone",1,"emerald_ore",0,"emerald_block",0,1);
         PlanetEntry coal = new PlanetEntry("coal_ore",0,"stone",2,"coal_ore",0,"coal_block",0,1);
         PlanetEntry redstone = new PlanetEntry("redstone_ore",0,"stone",2,"redstone_ore",0,"redstone_block",0,2);
-        PlanetEntry glowstone = new PlanetEntry("glowstone",0,"glowstone",2,"glowstone",0,"redstone_block",0,3);
+        PlanetEntry glowstone = new PlanetEntry("glowstone",0,"glowstone",2,"glowstone",0,"obsidian",0,3);
         save(iron);
         save(gold);
         save(diamond);

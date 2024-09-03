@@ -10,7 +10,10 @@ import io.github.opencubicchunks.cubicchunks.api.worldgen.ICubeGenerator;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.populator.CubePopulatorEvent;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.populator.event.PopulateCubeEvent;
 import io.wurmatron.ccspecial.common.utils.BlockLoader;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockCarpet;
+import net.minecraft.block.BlockCarrot;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -29,15 +32,20 @@ public class SkygridCubeGenerator implements ICubeGenerator {
     protected World world;
     private Biome[] columnBiomes;
 
+    private static final Random RANDOM = new Random();
+    public static IBlockState[] blocks;
+    public static int size;
 
     public SkygridCubeGenerator(World world) {
         this.world = world;
         world.setSpawnPoint(new BlockPos(0, 0, 0));
+        blocks = BlockLoader.skyblock.toArray(new IBlockState[0]);
+        size = blocks.length;
     }
 
     @Override
     public CubePrimer generateCube(int cubeX, int cubeY, int cubeZ) {
-        return this.generateCube(cubeX, cubeY, cubeZ, CubePrimer.createFilled(Blocks.AIR.getDefaultState()));
+        return this.generateCube(cubeX, cubeY, cubeZ, new CubePrimer());
     }
 
     @Override
@@ -114,33 +122,28 @@ public class SkygridCubeGenerator implements ICubeGenerator {
     }
 
     private IBlockState getRandomBlock() {
-        if (BlockLoader.skyblock != null && !BlockLoader.skyblock.isEmpty())
-            return BlockLoader.skyblock.get(world.rand.nextInt(BlockLoader.skyblock.size()));
-        else {
-            BlockLoader.loadSkyBlock();
-            return getRandomBlock();
-        }
+        return blocks[RANDOM.nextInt(size)];
     }
-
 
     private void setBlockState(int x, int y, int z, CubePrimer primer) {
         IBlockState state = getRandomBlock();
-        if (state.getBlock() instanceof BlockBush) {
-            if (state.getBlock() == Blocks.WHEAT || state.getBlock() == Blocks.CARROTS || state.getBlock() == Blocks.POTATOES) {
+        Block block = state.getBlock();
+        if (block instanceof BlockBush) {
+            if (block == Blocks.WHEAT || block == Blocks.CARROTS || block == Blocks.POTATOES || block == Blocks.BEETROOTS) {
                 primer.setBlockState(x, y + 1, z, state);
                 primer.setBlockState(x, y, z, Blocks.FARMLAND.getDefaultState());
                 return;
             }
-            if (state.getBlock() == Blocks.NETHER_WART) {
+            if (block == Blocks.NETHER_WART) {
                 primer.setBlockState(x, y + 1, z, state);
                 primer.setBlockState(x, y, z, Blocks.SOUL_SAND.getDefaultState());
                 return;
             }
         }
-        if (state.getBlock().equals(Blocks.REEDS)) {
+        if (block.equals(Blocks.REEDS)) {
             primer.setBlockState(x, y, z + 1, Blocks.WATER.getDefaultState());
         }
-        if (state.getBlock().equals(Blocks.WATERLILY)) {
+        if (block.equals(Blocks.WATERLILY)) {
             primer.setBlockState(x, y, z, Blocks.WATER.getDefaultState());
             primer.setBlockState(x, y + 1, z, state);
             return;
