@@ -1,7 +1,7 @@
 package io.wurmatron.ccspecial.common.utils;
 
 import io.wurmatron.ccspecial.CCSpecial;
-import io.wurmatron.ccspecial.api.PlanentEntry;
+import io.wurmatron.ccspecial.api.PlanetEntry;
 import io.wurmatron.ccspecial.api.SkyblockEntry;
 import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
@@ -23,7 +23,7 @@ public class BlockLoader {
     public static File PLANET_FILES = new File(CCSpecial.configDir + File.separator + "planets");
 
     public static ArrayList<IBlockState> skyblock = new ArrayList<>();
-    public static ArrayList<PlanentEntry> planets = new ArrayList<>();
+    public static ArrayList<PlanetEntry> planets = new ArrayList<>();
 
     public static void loadSkyBlock() {
         if (SKYBLOCK_FILES.exists()) {
@@ -50,7 +50,26 @@ public class BlockLoader {
         }
     }
 
-    private static Block getBlock(String name) {
+    public static IBlockState[] convert(PlanetEntry entry) {
+        IBlockState core = load(entry.coreBlock, entry.coreMeta);
+        IBlockState filler = load(entry.fillerBlock, entry.fillerMeta);
+        IBlockState fillerRare = load(entry.fillerRareBlock, entry.fillerRareMeta);
+        IBlockState outer = load(entry.outerBlock, entry.outerMeta);
+        if (core != Blocks.AIR && filler != Blocks.AIR && fillerRare != Blocks.AIR || outer != Blocks.AIR) {
+            return new IBlockState[]{outer, filler, fillerRare, core};
+        }
+        return new IBlockState[]{Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState()};
+    }
+
+    public static IBlockState load(String name, int meta) {
+        Block block = getBlock(name);
+        if (block != null && block != Blocks.AIR) {
+            return block.getStateFromMeta(meta);
+        }
+        return Blocks.AIR.getDefaultState();
+    }
+
+    public static Block getBlock(String name) {
         if (name.contains(":")) {
             String[] parts = name.split(":");
             return ForgeRegistries.BLOCKS.getValue(new ResourceLocation(parts[0], parts[1]));
@@ -62,7 +81,7 @@ public class BlockLoader {
         if (PLANET_FILES.exists()) {
             for (File file : PLANET_FILES.listFiles()) {
                 try {
-                    PlanentEntry entry = CCSpecial.GSON.fromJson(Strings.join(Files.readAllLines(file.toPath()), "\n"), PlanentEntry.class);
+                    PlanetEntry entry = CCSpecial.GSON.fromJson(Strings.join(Files.readAllLines(file.toPath()), "\n"), PlanetEntry.class);
                     if (validate(entry)) {
                         for (int count = 0; count < entry.rarityEntry; count++) {
                             planets.add(entry);
@@ -76,7 +95,8 @@ public class BlockLoader {
                 }
             }
         } else {
-            // TODO Create default's
+            generateDefaultPlanets();
+            loadPlanets();
         }
     }
 
@@ -85,7 +105,7 @@ public class BlockLoader {
             "plant", "dispenser", "dropper", "gateway", "flower_pot", "pane", "hopper", "lit_", "stem", "_extension",
             "powered_", "structure_", "pressure_plate", "button", "tallgrass", "sign", "snow_layer", "piston_head",
             "leaves", "fire", "double_plant", "daylight_detector", "placed_", "molten", "debug", "bloom", "bellows",
-            "bloomery", "forge", "redstone_torch", };
+            "bloomery", "forge", "redstone_torch",};
 
     private static void generateDefaultSkyblock() {
         m:
@@ -122,12 +142,43 @@ public class BlockLoader {
         }
     }
 
+    private static void generateDefaultPlanets() {
+        PlanetEntry iron = new PlanetEntry("iron_ore",0,"stone",2,"iron_ore",0,"iron_block",0,5);
+        PlanetEntry gold = new PlanetEntry("gold_ore",0,"stone",2,"gold_ore",0,"gold_block",0,3);
+        PlanetEntry diamond = new PlanetEntry("diamond_ore",0,"stone",0,"diamond_ore",0,"diamond_block",0,1);
+        PlanetEntry emerald = new PlanetEntry("emerald_ore",0,"stone",1,"emerald_ore",0,"emerald_block",0,1);
+        PlanetEntry coal = new PlanetEntry("coal_ore",0,"stone",2,"coal_ore",0,"coal_block",0,1);
+        PlanetEntry redstone = new PlanetEntry("redstone_ore",0,"stone",2,"redstone_ore",0,"redstone_block",0,2);
+        PlanetEntry glowstone = new PlanetEntry("glowstone",0,"glowstone",2,"glowstone",0,"redstone_block",0,3);
+        save(iron);
+        save(gold);
+        save(diamond);
+        save(emerald);
+        save(coal);
+        save(redstone);
+        save(glowstone);
+    }
+
+    private static void save(PlanetEntry entry) {
+        if (!PLANET_FILES.exists()) {
+            PLANET_FILES.mkdirs();
+            CCSpecial.logger.info("Creating Planenets Folder");
+        }
+        try {
+            Files.write(new File(PLANET_FILES + File.separator + entry.coreBlock.toUpperCase().replaceAll(":", "-") + ".json").toPath(), CCSpecial.GSON.toJson(entry).getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE_NEW);
+            CCSpecial.logger.info("Creating Default Planets file for " + entry.coreBlock);
+        } catch (Exception e) {
+            CCSpecial.logger.warn("Failed to save '" + entry.coreBlock + "'");
+            e.printStackTrace();
+        }
+    }
+
     private static boolean verifyBlock(String name) {
         Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(name));
         return block != null && block != Blocks.AIR;
     }
 
-    private static boolean validate(PlanentEntry entry) {
+    private static boolean validate(PlanetEntry entry) {
         if (!verifyBlock(entry.coreBlock)) {
             CCSpecial.logger.warn("Invalid Core Block '" + entry.coreBlock + "'");
             return false;

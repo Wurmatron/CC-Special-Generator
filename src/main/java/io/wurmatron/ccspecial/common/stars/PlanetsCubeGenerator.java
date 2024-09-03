@@ -9,7 +9,6 @@ import io.github.opencubicchunks.cubicchunks.api.worldgen.CubePrimer;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.ICubeGenerator;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.populator.CubePopulatorEvent;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.populator.event.PopulateCubeEvent;
-import io.wurmatron.ccspecial.common.skygrid.PlanetPopulate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -45,26 +44,6 @@ public class PlanetsCubeGenerator implements ICubeGenerator {
     public CubePrimer generateCube(int cubeX, int cubeY, int cubeZ, CubePrimer primer) {
         // All done via populate due to large size
         return primer;
-    }
-
-    // TODO Replace with Config
-    private IBlockState getRandomBlock(int radiusFromCenter) {
-        int r = world.rand.nextInt(5);
-        if (r > 0) {
-            if (r == 0) {
-                return Blocks.STONE.getDefaultState();
-            } else if (r == 1) {
-                return Blocks.BOOKSHELF.getDefaultState();
-            } else if (r == 2) {
-                return Blocks.HAY_BLOCK.getDefaultState();
-            } else if (r == 3) {
-                return Blocks.DIRT.getDefaultState();
-            } else {
-                return Blocks.BONE_BLOCK.getDefaultState();
-            }
-        } else {
-            return Blocks.DIAMOND_BLOCK.getDefaultState();
-        }
     }
 
     public void generateColumn(Chunk column) {

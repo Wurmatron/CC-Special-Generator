@@ -1,6 +1,6 @@
 package io.wurmatron.ccspecial.api;
 
-public class PlanentEntry {
+public class PlanetEntry {
 
     public String outerBlock;
     public int outerMeta;
@@ -16,7 +16,7 @@ public class PlanentEntry {
 
     public int rarityEntry; // Lower == More Rare
 
-    public PlanentEntry(String outerBlock, int outerMeta, String fillerBlock, int fillerMeta, String fillerRareBlock, int fillerRareMeta, String coreBlock, int coreMeta, int rarityEntry) {
+    public PlanetEntry(String outerBlock, int outerMeta, String fillerBlock, int fillerMeta, String fillerRareBlock, int fillerRareMeta, String coreBlock, int coreMeta, int rarityEntry) {
         this.outerBlock = outerBlock;
         this.outerMeta = outerMeta;
         this.fillerBlock = fillerBlock;
