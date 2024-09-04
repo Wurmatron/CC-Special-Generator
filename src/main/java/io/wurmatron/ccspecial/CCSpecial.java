@@ -13,11 +13,12 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-@Mod(modid = CCSpecial.MODID, name = CCSpecial.NAME, version = CCSpecial.VERSION)
+@Mod(modid = CCSpecial.MODID, name = CCSpecial.NAME, version = CCSpecial.VERSION, dependencies = CCSpecial.DEPENDENCIES)
 public class CCSpecial {
     public static final String MODID = "ccspecial";
     public static final String NAME = "CC Special Generator";
     public static final String VERSION = "0.0.0";
+    public static final String DEPENDENCIES = "required-after:cubicchunks;";
 
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     public static Logger logger;
